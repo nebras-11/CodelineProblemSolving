@@ -1,0 +1,35 @@
+<?php
+
+// Function to generate a list of squares of even numbers
+function generateEvenSquares($numbers) {
+    // Use array comprehension to create a new list of even squares
+    $evenSquares = array_filter(
+        array_map(function($n) {
+            return $n * $n;
+        }, $numbers),
+        function($n) {
+            return $n % 2 == 0;
+        }
+    );
+    return $evenSquares;
+}
+
+// Function to extract a sublist from a given start and end index
+function extractSublist($numbers, $start, $end) {
+    return array_slice($numbers, $start, $end - $start + 1);
+}
+
+// Get user input
+$input = readline("Enter the list of integers (separated by spaces): ");
+$numbers = explode(" ", $input);
+$numbers = array_map('intval', $numbers);
+
+// Generate the list of squares of even numbers
+$evenSquares = generateEvenSquares($numbers);
+echo "List of squares of even numbers: " . implode(", ", $evenSquares) . "\n";
+
+// Extract a sublist
+$startIndex = (int) readline("Enter the start index: ");
+$endIndex = (int) readline("Enter the end index: ");
+$sublist = extractSublist($numbers, $startIndex, $endIndex);
+echo "Sublist: " . implode(", ", $sublist) . "\n";
